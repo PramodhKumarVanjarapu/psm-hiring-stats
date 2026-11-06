@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --canvas: #f2f5f8;
+  --surface: #ffffff;
+  --sunken: #e8edf2;
+  --ink: #17212b;
+  --muted: #5e6b78;
+  --faint: #8a96a3;
+  --line: #dce2e8;
+  --primary: #1f5a9e;
+  --primary-ink: #ffffff;
+  --good: #23845b;
+  --warn: #a8690f;
+  --bad: #c2412d;
+  --good-bg: #e3f3eb;
+  --warn-bg: #fbf0dc;
+  --bad-bg: #fbe6e2;
+  --st-ta: #8fb3d9;
+  --st-rs: #5b8fc7;
+  --st-sc: #3a72b0;
+  --st-as: #255a94;
+  --st-sp: #143f6e;
+  --focus: #2f7ad1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --canvas: #12181f;
+    --surface: #19212a;
+    --sunken: #222c37;
+    --ink: #e6ebf0;
+    --muted: #a3afbb;
+    --faint: #75818d;
+    --line: #2c3743;
+    --primary: #5b9be0;
+    --primary-ink: #0d1620;
+    --good: #4cc08a;
+    --warn: #e0a64a;
+    --bad: #ef7a64;
+    --good-bg: #173327;
+    --warn-bg: #3a2c14;
+    --bad-bg: #3d1f1a;
+    --st-ta: #a9c7e8;
+    --st-rs: #7fadde;
+    --st-sc: #5b92cf;
+    --st-as: #3e76b8;
+    --st-sp: #2a5b97;
+    --focus: #7fb4ee;
+  }
+}
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --color-good-bg: var(--good-bg);
+  --color-warn-bg: var(--warn-bg);
+  --color-bad-bg: var(--bad-bg);
+  --color-st-ta: var(--st-ta);
+  --color-st-rs: var(--st-rs);
+  --color-st-sc: var(--st-sc);
+  --color-st-as: var(--st-as);
+  --color-st-sp: var(--st-sp);
+}
+
+html, body, #root { height: 100%; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.num { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+dialog::backdrop { background: rgb(10 16 24 / 0.45); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

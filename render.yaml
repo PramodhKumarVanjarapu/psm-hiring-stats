@@ -1,0 +1,42 @@
+# Render Blueprint: creates the API and the React app together.
+# Render dashboard -> New -> Blueprint -> pick this repo. Fill in the "sync: false" values when asked.
+services:
+  - type: web
+    name: hiring-funnel-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: applicant_analytics
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false   # the React app's address, e.g. https://hiring-funnel-web.onrender.com
+
+  - type: web
+    name: hiring-funnel-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite        # lets links like /jobs/NUB-0425 open directly
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false   # the API's address, e.g. https://hiring-funnel-api.onrender.com
